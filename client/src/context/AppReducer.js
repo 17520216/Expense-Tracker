@@ -8,6 +8,13 @@ export default (state, action) => {
         ),
       };
 
+    case "GET_ONE_TRANSACTION":
+      console.log("toi day roi nha", action.payload);
+      return {
+        ...state,
+        transaction: action.payload,
+      };
+
     case "ADD_TRANSACTION":
       return {
         ...state,
@@ -21,7 +28,6 @@ export default (state, action) => {
         loading: false,
         transactions: action.payload,
       };
-
     case "TRANSACTION_ERROR":
       return {
         ...state,

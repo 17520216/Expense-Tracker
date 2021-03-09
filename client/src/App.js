@@ -6,12 +6,13 @@ import { IncomeExpense } from "./components/IncomeExpense";
 import { TransactionList } from "./components/TransactionList";
 import { AddTransaction } from "./components/AddTransaction";
 import { GlobalProvider } from "./context/GlobalState";
+import { EditTransaction } from "./components/EditTransaction";
+import { Modal, Button } from "antd";
+import "antd/dist/antd.css";
 
 function App() {
   const [showAdd, setShowAdd] = useState(false);
-  const onSubmit = (e) => {
-    console.log(e.target.value);
-  };
+
   return (
     <GlobalProvider>
       <div className="container">

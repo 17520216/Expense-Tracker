@@ -20,6 +20,22 @@ exports.getTransactions = async (req, res, next) => {
   }
 };
 
+// getOneTransaction
+exports.getOneTransaction = async (req, res, next) => {
+  try {
+    const transactions = await Transaction.findOne(req.id);
+    return res.status(200).json({
+      success: true,
+      data: transactions,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
 // @desc  Add Transaction
 //@routes GET /api/v1/transactions
 //@access Public

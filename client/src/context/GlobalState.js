@@ -34,6 +34,22 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function getOneTransactions(id) {
+    try {
+      const res = await axios.get(`/api/v1/transactions/${id}`);
+      console.log("toi day chua", res);
+      dispatch({
+        type: "GET_ONE_TRANSACTION",
+        payload: res.data.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: "TRANSACTION_ERROR",
+        payload: err.response.data.error,
+      });
+    }
+  }
+
   async function deleteTransaction(id) {
     try {
       await axios.delete(`/api/v1/transactions/${id}`);
@@ -76,6 +92,7 @@ export const GlobalProvider = ({ children }) => {
         deleteTransaction,
         addTransaction,
         getTransactions,
+        getOneTransactions,
         loading: state.loading,
         error: state.error,
       }}
