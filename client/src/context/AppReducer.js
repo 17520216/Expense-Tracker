@@ -12,7 +12,8 @@ export default (state, action) => {
       console.log("toi day roi nha", action.payload);
       return {
         ...state,
-        transaction: action.payload,
+        oneTransaction: action.payload,
+        visible: true,
       };
 
     case "ADD_TRANSACTION":
@@ -34,6 +35,12 @@ export default (state, action) => {
         loading: false,
         error: action.payload,
       };
+    case "VISIBLE": {
+      return {
+        ...state,
+        visible: action.payload,
+      };
+    }
 
     default:
       return state;

@@ -13,11 +13,13 @@ export const AddTransaction = () => {
       amount: +amount,
     };
     addTransaction(newTransaction);
+    setText("");
+    setAmount(0);
   };
 
   return (
     <>
-      <h3> Add New Transaction </h3>
+      <h3> Add Transaction </h3>
       <form>
         <div className="form-control">
           <label htmlFor="text">Text</label>

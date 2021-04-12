@@ -5,15 +5,17 @@ import { EditOutlined, CloseOutlined } from "@ant-design/icons";
 import { Button, Modal } from "antd";
 
 export const Transaction = ({ transaction }) => {
-  const [visible, setVisible] = useState(false);
-  const [text, setText] = useState("");
-  const [amount, setAmount] = useState(0);
-
   const sign = transaction.amount > 0 ? "+$" : "-$";
   const { deleteTransaction, getOneTransactions } = useContext(GlobalContext);
+  const handleClick = (id) => {
+    getOneTransactions(id);
+  };
 
   return (
-    <li className={transaction.amount > 0 ? "plus" : "minus"}>
+    <li
+      style={{ display: "flex" }}
+      className={transaction.amount > 0 ? "plus" : "minus"}
+    >
       <div
         style={{
           display: "flex",
@@ -33,35 +35,8 @@ export const Transaction = ({ transaction }) => {
       <Button
         className="btn add"
         type="primary"
-        onClick={() => getOneTransactions(transaction._id)}
-        icon={<EditOutlined onClick={() => setVisible(true)} />}
+        icon={<EditOutlined onClick={() => handleClick(transaction._id)} />}
       />
-      <Modal
-        title="Modal 1000px width"
-        centered
-        visible={visible}
-        onCancel={() => setVisible(false)}
-        footer={<Button onClick={() => setVisible(false)}>Cancel</Button>}
-      >
-        <form>
-          <div className="form-control">
-            <label htmlFor="text">Text</label>
-            <input type="text" value={text} placeholder={transaction.text} />
-          </div>
-          <div className="form-control">
-            <label htmlFor="amount">
-              Amount <br />
-              (negative - expense, positive - income)
-            </label>
-            <input
-              value={amount}
-              type="number"
-              placeholder={transaction.amount}
-            />
-          </div>
-          <button className="btn">Change Transaction</button>
-        </form>
-      </Modal>
 
       <Button
         style={{ marginLeft: "4px" }}

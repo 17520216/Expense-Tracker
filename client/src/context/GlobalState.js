@@ -5,8 +5,10 @@ import axios from "axios";
 //InitialState
 const initialState = {
   transactions: [],
+  oneTransaction: [],
   erro: null,
   loading: true,
+  visible: false,
 };
 
 // Create Context
@@ -19,6 +21,17 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   //Action
+  function hideModal() {
+    try {
+      dispatch({
+        type: "VISIBLE",
+        payload: false,
+      });
+    } catch (error) {
+      return;
+    }
+  }
+
   async function getTransactions() {
     try {
       const res = await axios.get("/api/v1/transactions");
@@ -89,12 +102,15 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         transactions: state.transactions,
+        oneTransaction: state.oneTransaction,
         deleteTransaction,
         addTransaction,
         getTransactions,
         getOneTransactions,
+        hideModal,
         loading: state.loading,
         error: state.error,
+        visible: state.visible,
       }}
     >
       {children}

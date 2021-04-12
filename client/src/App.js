@@ -7,7 +7,6 @@ import { TransactionList } from "./components/TransactionList";
 import { AddTransaction } from "./components/AddTransaction";
 import { GlobalProvider } from "./context/GlobalState";
 import { EditTransaction } from "./components/EditTransaction";
-import { Modal, Button } from "antd";
 import "antd/dist/antd.css";
 
 function App() {
@@ -25,6 +24,7 @@ function App() {
         <IncomeExpense />
         <TransactionList />
         {showAdd && <AddTransaction />}
+        <EditTransaction />
       </div>
     </GlobalProvider>
   );

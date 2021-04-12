@@ -23,11 +23,12 @@ exports.getTransactions = async (req, res, next) => {
 // getOneTransaction
 exports.getOneTransaction = async (req, res, next) => {
   try {
-    const transactions = await Transaction.findOne(req.id);
+    const transactions = await Transaction.findById(req.params.id);
     return res.status(200).json({
       success: true,
       data: transactions,
     });
+    await transaction.findOne();
   } catch (err) {
     return res.status(500).json({
       success: false,
